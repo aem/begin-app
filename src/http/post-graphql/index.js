@@ -15,7 +15,12 @@ let resolvers = {
   },
 }
 
-let server = new ApolloServer({typeDefs, resolvers})
+let server = new ApolloServer({typeDefs, resolvers, cors: {
+  "origin": "*",
+  "methods": "GET,HEAD,PUT,PATCH,POST,DELETE",
+  "preflightContinue": false,
+  "optionsSuccessStatus": 204
+}})
 let handler = server.createHandler()
 
 exports.handler = function(event, context, callback) {
