@@ -4,12 +4,14 @@ let {ApolloServer, gql} = require('apollo-server-lambda')
 let typeDefs = gql`
   type Query {
     hello: String
+    invalid: String
   }
 `
 
 let resolvers = {
   Query: {
     hello: () => 'Hello world!',
+    invalid: () => { throw new Error('test error') }
   },
 }
 
