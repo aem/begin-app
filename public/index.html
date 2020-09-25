@@ -39,24 +39,22 @@
       </code></pre>
     </section>
     
-    <script src="//unpkg.com/react@^16/umd/react.production.min.js"></script>
-    <script src="https://unpkg.com/graphql@15.3.0/index.mjs" type="module"></script>
-    <script src="https://unpkg.com/@apollo/client@3.2.1/index.js" type="module"></script>
-    <script src="https://unpkg.com/@apollo/react-hooks@3.1.5/lib/react-hooks.umd.js"></script>
-
     <!-- Example GraphQL query -->
     <script type=module>
-      ;import { ApolloClient, InMemoryCache } from '@apollo/client';
       ;(async function() {
-        const client = new ApolloClient({
-          uri: 'https://48p1r2roz4.sse.codesandbox.io',
-          cache: new InMemoryCache()
-        });
-        client
-          .query({
-            query: gql`{ hello, invalid }`
-          })
-         .then(result => code.innerHTML = JSON.stringify(result, null, 2));
+      let query = `{hello}`
+      let result = await fetch('/graphql', {
+        method: 'post',
+        body: JSON.stringify({query}),
+        headers: {
+          'X-Requested-With': 'XMLHttpRequest',
+          'Content-Type': 'application/json',
+        }
+      })
+      let json = await result.json()
+      console.log(json)
+      let code = document.getElementById('code')
+      code.innerHTML = JSON.stringify(json, null, 2)
       })()
     </script>
   </body>
