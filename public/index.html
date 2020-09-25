@@ -42,7 +42,7 @@
     <!-- Example GraphQL query -->
     <script type=module>
       ;(async function() {
-      let query = `{hello}`
+      let query = `{hello,invalid}`
       let result = await fetch('/graphql', {
         method: 'post',
         body: JSON.stringify({query}),
