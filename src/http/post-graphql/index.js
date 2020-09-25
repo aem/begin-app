@@ -26,5 +26,6 @@ exports.handler = function(event, context, callback) {
     : event.requestContext.http.method
   // Body is now parsed, re-encode to JSON for Apollo
   event.body = body
+  event.cors = true
   handler(event, context, callback)
 }
